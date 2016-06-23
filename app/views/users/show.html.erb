@@ -1,0 +1,33 @@
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<%= error %>
+	<% end %>
+<% end %>
+
+<div>
+	<p><%= @user.name %></p>
+	<a href="/users/<%= session[:id] %>/edit">Edit Profile</a>
+</div>
+
+
+<form action="/secrets" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<textarea id="New Secret" name="new_secret"></textarea>
+	<input type="submit" id="Create Secret">
+</form>
+<h3>Secrets</h3>
+<% if @user.secrets %>
+	<% @user.secrets.each do |secret| %>
+		<div>
+			<p><%= secret.content %></p>
+		</div>
+		<p><%= secret.likes.count %> likes</p>
+		<form action="/secrets/<%= secret.id %>" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" name="Delete" value="Delete" id="Delete">
+		</form>
+	<% end %>
+<% end %>
+
+

@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+<% end %>
+<form action="/sessions" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<div>
+		<label>Email:</label>
+		<input id="Email" type="text" name="email">
+	</div>
+	<div>
+		<label>Password:</label>
+		<input id="Password" type="password" name="password">
+	</div>
+		<input id="Log In" type="submit" name="Log In">
+	</div>
+	
+</form>
